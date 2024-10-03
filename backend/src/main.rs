@@ -6,10 +6,10 @@ use rocket::{Build, Rocket};
 use routes::auth_routes;
 mod auth;
 mod db;
+mod guards;
 mod handlers;
 mod models;
 mod routes;
-
 #[get("/")]
 fn index() -> &'static str {
     "Hello, world!"
