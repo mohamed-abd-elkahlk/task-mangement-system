@@ -1,11 +1,11 @@
 -- @block
 -- Create users table
 CREATE TABLE IF NOT EXISTS users (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    created_at DATETIME NOT NULL DEFAULT DATETIME
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 -- Create tasks table
 CREATE TABLE IF NOT EXISTS tasks (
