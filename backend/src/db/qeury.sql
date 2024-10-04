@@ -1,4 +1,3 @@
--- @block
 -- Create users table
 CREATE TABLE IF NOT EXISTS users (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -7,21 +6,23 @@ CREATE TABLE IF NOT EXISTS users (
     password VARCHAR(255) NOT NULL,
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+-- Create projects table
+CREATE TABLE IF NOT EXISTS projects (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    user_id INT NOT NULL,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
 -- Create tasks table
 CREATE TABLE IF NOT EXISTS tasks (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
-    project_id INT NOT NULL title VARCHAR(255) NOT NULL,
+    project_id INT NOT NULL,
+    title VARCHAR(255) NOT NULL,
     description TEXT,
-    due_date DATETIME created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE
+    due_date DATETIME,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE
 );
--- @block
-CREATE TABLE IF NOT EXISTS projects (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL
-);
-ALTER TABLE tasks
-ADD COLUMN project_id INT,
-    ADD COLUMN due_date DATETIME,
-    ADD CONSTRAINT fk_project FOREIGN KEY (project_id) REFERENCES projects(id);
